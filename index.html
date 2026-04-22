@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meus Links</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+
+      background-color: #020617;
+
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, white, transparent),
+        radial-gradient(1px 1px at 80% 70%, white, transparent),
+        radial-gradient(2px 2px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 10% 80%, #c7d2fe, transparent),
+        radial-gradient(2px 2px at 90% 20%, #a5b4fc, transparent);
+
+      background-size: 300px 300px;
+      background-repeat: repeat;
+      animation: starsMove 60s linear infinite;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(99,102,241,0.15), transparent 60%),
+        radial-gradient(circle at bottom, rgba(56,189,248,0.1), transparent 60%);
+      z-index: 0;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 40px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+      animation: float 3s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #6366f1;
+      margin-bottom: 10px;
+    }
+
+    a {
+      display: block;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 25px;
+      background: #6366f1;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background: #4f46e5;
+      transform: scale(1.05);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes starsMove {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 1000px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+      <h1>redirecionamento
+   
+ <h1>dogzin dev</h1>
+
+    <a href="https://discord.gg/nKBktWxep7" target="_blank">Discord</a>
+    <a href="https://github.com/dogzinxix" target="_blank">GitHub</a>
+    <a href="https://mailto:dog776246"       target+_blank">Gmail</a>
+ <a href="https://instagram.com/dogzinxix" target="_blank">Instagram</a>
+  </div>
+
+</body>
+</html>
