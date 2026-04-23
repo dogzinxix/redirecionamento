@@ -1,100 +1,425 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Meus Links</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>d0gzin.dev - Desenvolvedor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Segoe UI", Tahoma, sans-serif;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        }
 
-      background-color: #020617;
+        /* Partículas de brilho animadas */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+            z-index: 0;
+        }
 
-      background-image:
-        radial-gradient(1px 1px at 20% 30%, white, transparent),
-        radial-gradient(1px 1px at 80% 70%, white, transparent),
-        radial-gradient(2px 2px at 50% 50%, white, transparent),
-        radial-gradient(1px 1px at 10% 80%, #c7d2fe, transparent),
-        radial-gradient(2px 2px at 90% 20%, #a5b4fc, transparent);
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-      background-size: 300px 300px;
-      background-repeat: repeat;
-      animation: starsMove 60s linear infinite;
-    }
+        /* Efeito de vento */
+        .wind-line {
+            position: fixed;
+            pointer-events: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: windBlow linear infinite;
+            z-index: 0;
+        }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at top, rgba(99,102,241,0.15), transparent 60%),
-        radial-gradient(circle at bottom, rgba(56,189,248,0.1), transparent 60%);
-      z-index: 0;
-    }
+        @keyframes windBlow {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateX(200%);
+                opacity: 0;
+            }
+        }
 
-    .card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      padding: 40px;
-      width: 320px;
-      text-align: center;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.35);
-      animation: float 3s ease-in-out infinite;
-      position: relative;
-      z-index: 1;
-    }
+        /* Brilhos flutuantes */
+        .glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(102,126,234,0.3) 0%, rgba(118,75,162,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatGlow 20s ease-in-out infinite;
+            z-index: 0;
+        }
 
-    h1 {
-      color: #6366f1;
-      margin-bottom: 10px;
-    }
+        @keyframes floatGlow {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translate(100px, 50px) scale(1.2);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(50px, 100px) scale(0.8);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translate(-50px, 50px) scale(1.1);
+                opacity: 0.5;
+            }
+        }
 
-    a {
-      display: block;
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 25px;
-      background: #6366f1;
-      color: white;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
 
-    a:hover {
-      background: #4f46e5;
-      transform: scale(1.05);
-    }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
+        /* Estilo para a foto de perfil */
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 3px;
+            animation: pulse 2s ease-in-out infinite;
+            cursor: pointer;
+        }
 
-    @keyframes starsMove {
-      from { background-position: 0 0; }
-      to { background-position: 1000px 1000px; }
-    }
-  </style>
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title {
+            color: #667eea;
+            font-size: 16px;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: rgba(248, 249, 250, 0.9);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .link-card:hover {
+            background: white;
+            border-color: #667eea;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .link-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .link-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .link-text {
+            text-align: left;
+        }
+
+        .link-platform {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .link-action {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .arrow {
+            color: #667eea;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 20px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .heart {
+            color: #ff4757;
+            display: inline-block;
+            animation: heartbeat 1.5s ease infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .link-card {
+                padding: 12px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Brilhos de fundo -->
+    <div class="glow" style="top: 10%; left: -10%;"></div>
+    <div class="glow glow2" style="bottom: 10%; right: -10%;"></div>
+    <div class="glow glow3" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
 
-  <div class="card">
-      <h1>redirecionamento
-   
- <h1>dogzin dev</h1>
+    <div class="container">
+        <!-- FOTO DE PERFIL - Mude o caminho da imagem aqui -->
+        <div class="profile-img">
+            <img src="site.jpg" alt="Dogzin Dev">
+        </div>
+        
+        <h1>Dogzin Dev</h1>
+        <div class="title">Desenvolvedor / Stremer </div>
+        
+        <div class="description">
+            Transformando ideias em código com muito dedicação!
+        </div>
+        
+        <div class="links">
+            <a href="#" class="link-card" id="discord-link" target="_blank">
+                <div class="link-info">
+                    <div class="link-icon">💬</div>
+                    <div class="link-text">
+                        <div class="link-platform">Discord</div>
+                        <div class="link-action">Entre no meu servidor</div>
+                    </div>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+            
+            <a href="#" class="link-card" id="github-link" target="_blank">
+                <div class="link-info">
+                    <div class="link-icon">🐙</div>
+                    <div class="link-text">
+                        <div class="link-platform">GitHub</div>
+                        <div class="link-action">Veja meus projetos</div>
+                    </div>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+            
+            <a href="#" class="link-card" id="email-link">
+                <div class="link-info">
+                    <div class="link-icon">📧</div>
+                    <div class="link-text">
+                        <div class="link-platform">Gmail</div>
+                        <div class="link-action">Envie um e-mail</div>
+                    </div>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+            
+            <a href="#" class="link-card" id="instagram-link" target="_blank">
+                <div class="link-info">
+                    <div class="link-icon">📸</div>
+                    <div class="link-text">
+                        <div class="link-platform">Instagram</div>
+                        <div class="link-action">Me siga no Instagram</div>
+                    </div>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+        </div>
+        
+        <div class="footer">
+            criado por dogzin dev
+        </div>
+    </div>
 
-    <a href="https://discord.gg/nKBktWxep7" target="_blank">Discord</a>
-    <a href="https://github.com/dogzinxix" target="_blank">GitHub</a>
-    <a href="https://mailto:dog776246"       target+_blank">Gmail</a>
- <a href="https://instagram.com/dogzinxix" target="_blank">Instagram</a>
-  </div>
-
+    <script>
+        // Links (substitua pelos seus)
+        const links = {
+            discord: "https://discord.gg/nKBktWxep7",
+            github: "https://github.com/dogzinxix",
+            email: "mailto:dog776246@gmail.com",
+            instagram: "https://instagram.com/dogzinxix"
+        };
+        
+        document.getElementById('discord-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open(links.discord, '_blank');
+        });
+        
+        document.getElementById('github-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open(links.github, '_blank');
+        });
+        
+        document.getElementById('email-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = links.email;
+        });
+        
+        document.getElementById('instagram-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open(links.instagram, '_blank');
+        });
+        
+        // Efeitos de partículas (mantido)
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            const size = Math.random() * 5 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDuration = `${Math.random() * 8 + 4}s`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, parseFloat(particle.style.animationDuration) * 1000);
+        }
+        
+        function createWindLine() {
+            const windLine = document.createElement('div');
+            windLine.classList.add('wind-line');
+            const width = Math.random() * 100 + 50;
+            windLine.style.width = `${width}px`;
+            windLine.style.top = `${Math.random() * 100}%`;
+            windLine.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            windLine.style.animationDelay = `${Math.random() * 5}s`;
+            document.body.appendChild(windLine);
+            
+            setTimeout(() => {
+                windLine.remove();
+            }, parseFloat(windLine.style.animationDuration) * 1000);
+        }
+        
+        setInterval(() => createParticle(), 300);
+        setInterval(() => createWindLine(), 800);
+        
+        for(let i = 0; i < 30; i++) {
+            setTimeout(() => createParticle(), i * 100);
+        }
+    </script>
 </body>
 </html>
